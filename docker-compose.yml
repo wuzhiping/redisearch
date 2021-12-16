@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  rejson:
+    #image: redislabs/redisearch
+    image: redislabs/rejson
+    restart: always
+    ports:
+      - 7379:6379
+    environment:
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8
+    command: redis-server /redis.conf
+    #command: ["redis-server","--loadmodule","/usr/lib/redis/modules/redisearch.so"]
+    volumes:
+      - ./redis.conf:/redis.conf
+      - ./data:/data
+    stdin_open: true
+    tty: true
+    privileged: true
+

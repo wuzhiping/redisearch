@@ -19,3 +19,15 @@ services:
     tty: true
     privileged: true
 
+  backend:
+    build: ./app
+    image: shawoo/search-backend-node
+    environment:
+      REDIS_URL: "redis://redisdb:6379"
+      REDIS_INDEX: "idx:movie"
+    restart: always
+    ports:
+      - "9086:8086"
+    links:
+      - rejson:redisdb
+
